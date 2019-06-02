@@ -10,12 +10,17 @@ const forecast = (long, lat, callback) => {
       callback('Unable to find location.', undefined);
     } else {
       const { summary } = body.daily
-      const { precipProbability, temperature, humidity } = body.currently
+      const { temperatureHigh, temperatureLow } = body.daily.data[0]
+      const { precipProbability, temperature, humidity, windSpeed, icon } = body.currently
       callback(undefined, {
-        dailySummary: summary,
+        summary,
+        temperatureHigh,
+        temperatureLow,
         precipProbability,
         temperature,
-        humidity
+        humidity,
+        windSpeed,
+        icon
       });
     };
   });
